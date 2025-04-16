@@ -1,0 +1,20 @@
+{
+  // this is used to setup vscode debugger
+    "version": "0.2.0",
+    "configurations": [
+        
+      {
+        "name": "Launch game (debug)",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/SpaceInvaders",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "externalConsole": true,
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb"
+      }
+    ]
+  }
+  

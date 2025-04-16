@@ -1,0 +1,53 @@
+{
+    // Tasks: Run Task -> Run Space Invaders game - to run the game from vscode (or simply run ./SpaceInvaders in terminal)
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Run Space Invaders game",
+        "type": "shell",
+        "command": "${workspaceFolder}/build/SpaceInvaders",
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "Clean Build Folder",
+        "type": "shell",
+        "command": "rm -rf build",       // Linux/macOS
+        "windows": {
+          "command": "rmdir /s /q build"  // Windows
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated",
+          "clear": true
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "Build and Run",
+        "type": "shell",
+        "command": "cmake --build ${workspaceFolder}/build && ${workspaceFolder}/build/SpaceInvaders",
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "new"
+        }
+      }
+    ]
+  }
+  
