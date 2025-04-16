@@ -39,6 +39,7 @@ private:
 	void Reset();
 	void InitGame();
 	void NextLevel();
+	void RestartGame();
 	int CalculateHealth(int alienType);
 	constexpr static float alienLaserShootInterval = 0.350;
 	float timeLastAlienFired;

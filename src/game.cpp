@@ -2,13 +2,13 @@
 #include <iostream>
 #include <fstream>
 
-Game::Game() {
-	level = 1; // has to be called before init game
+Game::Game() {	
 	music = LoadMusicStream("assets/Sounds/music.ogg");
     explosionSound = LoadSound("assets/Sounds/explosion.ogg");
     PlayMusicStream(music);
-	InitGame();
+	level = 1; // has to be declared before init game
 	score = 0;
+	InitGame();	
 }
 
 Game::~Game() {
@@ -64,8 +64,7 @@ void Game::Update() {
 		mysteryship.Update();
 		CheckForCollisions();
 	}else if(IsKeyDown(KEY_ENTER)){
-		Reset();
-		InitGame();
+		RestartGame();
 	}
 }
 
@@ -87,7 +86,7 @@ void Game::HandleInput()
 
 void Game::CreateObstacles()
 {
-	int obstacleWidth = Obstacle::grid[0].size() * 3;
+	int obstacleWidth = Obstacle::grid[0].size() * 4;
 	float gap = (GetScreenWidth() - (obstacleWidth * 4)) / 5;
 
 	for (int i = 0; i < 4; i++) {
@@ -309,20 +308,27 @@ int Game::loadHighScoreFromFile(){
 	return loadedHighScore;
 }
 
-void Game::GameOver()
-{
+// stop the game
+void Game::GameOver(){
 	isRunning = false;
-	score = 0;
 }
 
+// load next level and keep the score
 void Game::NextLevel(){
 	isRunning = false;
 	level++;
-	Reset();
 	InitGame();
 }
 
+// clear everything and load game (score and level should be set before call)
 void Game::InitGame(){
+
+	isRunning = false;
+	spaceship.Reset();
+	aliens.clear();
+	alienLasers.clear();
+	obstacles.clear();
+
 	CreateObstacles();
 	aliens = CreateAliens();
 	aliensDirection = 1;
@@ -335,14 +341,11 @@ void Game::InitGame(){
 	isRunning = true;
 }
 
-// clear everything
-void Game::Reset(){
-	isRunning = false;
-	spaceship.Reset();
-	aliens.clear();
-	alienLasers.clear();
-	obstacles.clear();
-	
+// restart game to level 1
+void Game::RestartGame(){
+	level = 1;
+	score = 0;
+	InitGame();
 }
 
 int Game::CalculateHealth(int alienType){
