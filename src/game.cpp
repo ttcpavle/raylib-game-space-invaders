@@ -68,10 +68,9 @@ void Game::Update() {
 	}
 }
 
-void Game::HandleInput()
-{
+void Game::HandleInput() {
 	if(isRunning){
-		// int key = GetKeyPressed();
+
 		if (IsKeyDown(KEY_LEFT)) {
 			spaceship.MoveLeft();
 		}else if (IsKeyDown(KEY_RIGHT)) {
@@ -115,8 +114,7 @@ void Game::DeleteInactiveLasers() {
 	}
 }
 
-std::vector<Alien> Game::CreateAliens()
-{
+std::vector<Alien> Game::CreateAliens() {
 	std::vector<Alien> aliens;
 	for(int row = 0; row < 5; row++){
 		for(int column = 0; column < 11; column++){
@@ -171,9 +169,7 @@ void Game::CheckForCollisions()
 		while(it != aliens.end()){
 			if(CheckCollisionRecs(it->getRect(), laser.getRect()) && laser.active){
 				PlaySound(explosionSound);
-				std::cout << "health before: " << it->health << std::endl;	
-				it->health--;
-				std::cout << "health after:  " << it->health << std::endl;				
+				it->health--;			
 				if(it->health <= 0){
 					if(it->type == 1){
 						score += 100;
@@ -287,7 +283,7 @@ void Game::AlienShootLaser() {
     }
 }
 
-void Game::SaveHighScoreToFile(int highScore){
+void Game::SaveHighScoreToFile(int highScore) {
 	std::ofstream highscoreFile("highscore.txt");
     if(highscoreFile.is_open()) {
         highscoreFile << highScore;
@@ -296,7 +292,7 @@ void Game::SaveHighScoreToFile(int highScore){
         std::cerr << "Failed to save highscore to file" << std::endl;
     }
 }
-int Game::loadHighScoreFromFile(){
+int Game::loadHighScoreFromFile() {
 	int loadedHighScore = 0;
 	std::ifstream highscoreFile("highscore.txt");
 	if(highscoreFile.is_open()){
@@ -309,12 +305,12 @@ int Game::loadHighScoreFromFile(){
 }
 
 // stop the game
-void Game::GameOver(){
+void Game::GameOver() {
 	isRunning = false;
 }
 
 // load next level and keep the score
-void Game::NextLevel(){
+void Game::NextLevel() {
 	isRunning = false;
 	level++;
 	InitGame();
@@ -342,7 +338,7 @@ void Game::InitGame(){
 }
 
 // restart game to level 1
-void Game::RestartGame(){
+void Game::RestartGame() {
 	level = 1;
 	score = 0;
 	InitGame();
