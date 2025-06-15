@@ -67,7 +67,7 @@ if(UNIX AND NOT APPLE)  # dependencie check linux
 endif()
 
 file(GLOB PROJECT_SOURCES "src/*.cpp")
-file(GLOB PROJECT_INCLUDE "src/*.h")
+set(PROJECT_INCLUDE "src/")
 
 add_executable(${PROJECT_NAME})
 target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCES})
